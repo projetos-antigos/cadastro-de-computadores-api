@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { string } = require("yup");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -13,7 +12,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
       validate: new RegExp("^[a-z]+([_-]?[a-z])*$"),
-      unique: true,
+      unique: [true, ""],
     },
     password: {
       type: String,

@@ -9,9 +9,37 @@ module.exports = {
       return res.status(500).json({ status: "fail", data: error.message });
     }
   },
+
   async index(req, res) {
     try {
-      const users = {};
+      const users = await UserRepository.find();
+      return res.status(200).json({ status: "success", data: users });
+    } catch (error) {
+      return res.status(500).json({ status: "fail", data: error.message });
+    }
+  },
+
+  async show(req, res) {
+    try {
+      const users = await UserRepository.findById(req.params.id);
+      return res.status(200).json({ status: "success", data: users });
+    } catch (error) {
+      return res.status(500).json({ status: "fail", data: error.message });
+    }
+  },
+
+  async delete(req, res) {
+    try {
+      const users = await UserRepository.delete(req.params.id);
+      return res.status(200).json({ status: "success", data: users });
+    } catch (error) {
+      return res.status(500).json({ status: "fail", data: error.message });
+    }
+  },
+
+  async update(req, res) {
+    try {
+      const users = await UserRepository.update(req.params.id, req.body);
       return res.status(200).json({ status: "success", data: users });
     } catch (error) {
       return res.status(500).json({ status: "fail", data: error.message });
